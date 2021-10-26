@@ -7,7 +7,7 @@
 </head>
 <body class="bg-dark">
     <div class="bg-warning text-center">
-        <a class="btn btn-warning btn-lg mt-3" th:href="@{/}" role="button">Parc Auto</a>
+        <a class="btn btn-warning btn-lg mt-3" th:href="@{/home_page}" role="button">Parc Auto</a>
     </div>
     <div class="bg-warning">
         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
@@ -17,8 +17,10 @@
                 <a class="btn btn-outline-dark mb-2" role="button">Favorite</a>
             </div>
             <div class="btn-group" role="group" aria-label="Second group">
-                <a class="btn btn-outline-dark mb-2" th:href="@{/register}" role="button">Inregistreaza-te</a>
-                <a class="btn btn-outline-dark mr-5 mb-2" th:href="@{/login}" role="button">Conecteaza-te</a>
+                <p class="mr-5">Salut <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-dark mr-5 mb-2" type="submit" value="Deconecteaza-te">
+                </form>
             </div>
         </div>
     </div>

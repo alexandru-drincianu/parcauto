@@ -22,6 +22,11 @@ public class AppController {
         return "signup_form";
     }
 
+    @GetMapping("/home_page")
+    public String viewHomePageLoggedIn() {
+        return "home_page";
+    }
+
     @PostMapping("/process_register")
     public String processRegistration(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
