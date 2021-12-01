@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parc Auto</title>
+    <link rel ="stylesheet" type = "text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body class="bg-dark">
+    <div class="bg-warning text-center">
+        <a class="btn btn-warning btn-lg mt-3" th:href="@{/home_page}" role="button">Parc Auto</a>
+    </div>
+    <div class="bg-warning">
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
+                <a class="btn btn-outline-dark ml-5 mb-2" th:href="@{/adauga_anunt}" role="button">Adauga Anunt</a>
+                <a class="btn btn-outline-dark mb-2" th:href="@{/favorite}" role="button">Favorite</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Second group">
+                <p class="mr-5">Salut <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-dark mr-5 mb-2" type="submit" value="Deconecteaza-te">
+                </form>
+            </div>
+        </div>
+    </div>
+    <h1 class="text-white text-center">Anunturile mele!</h1>
+    <div class="text-white">
+        <table class="table table-striped table-borderless">
+            <thead class ="thead-light">
+            <tr>
+                <th>Marca</th>
+                <th>Model</th>
+                <th>An</th>
+                <th>Kilometri</th>
+                <th>Capacitate Motor</th>
+                <th>Combustibil</th>
+                <th>Pret</th>
+                <th>Telefon</th>
+                <th>Sterge</th>
+                <th>Editeaza</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${listCars}" class="text-white mt-5">
+                <td class="mt-5" th:text="${car.marca}">Marca</td>
+                <td th:text="${car.model}">Model</td>
+                <td th:text="${car.an}">An</td>
+                <td th:text="${car.km}">Kilometri</td>
+                <td th:text="${car.capacitateMotor}">Capacitate Motor</td>
+                <td th:text="${car.combustibil}">Combustibil</td>
+                <td th:text="${car.pret}">Pret</td>
+                <td th:text="${car.user.getPhoneNumber()}">Telefon</td>
+                <td><a th:href="@{delete_car/__${car.id}__}" class="btn btn-danger">Sterge</a></td>
+                <td><a th:href="@{'/car/edit/' + ${car.id}}" class="btn btn-info">Editeaza</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
