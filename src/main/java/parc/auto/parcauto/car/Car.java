@@ -1,4 +1,6 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.car;
+
+import parc.auto.parcauto.user.User;
 
 import javax.persistence.*;
 

@@ -1,4 +1,4 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

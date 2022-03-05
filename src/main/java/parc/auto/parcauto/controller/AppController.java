@@ -1,7 +1,7 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -14,6 +14,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import parc.auto.parcauto.car.Car;
+import parc.auto.parcauto.car.CarRepository;
+import parc.auto.parcauto.user.User;
+import parc.auto.parcauto.user.UserRepository;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -111,7 +115,7 @@ public class AppController {
     }
 
     @PostMapping("/process_register")
-    public String processRegistration(User user) {
+    public String processRegistration(User user, RedirectAttributes ra) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encodedPassword = encoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
@@ -204,7 +208,6 @@ public class AppController {
         User user = repoUser.findByEmail(currentUserName);
         user.favCars.remove(repoCar.findByID(id));
         repoUser.save(user);
-        Car car = new Car();
         return "redirect:/favorite";
     }
 

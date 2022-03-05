@@ -1,4 +1,6 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.user;
+
+import parc.auto.parcauto.car.Car;
 
 import javax.persistence.*;
 import java.util.ArrayList;
