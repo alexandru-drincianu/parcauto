@@ -7,39 +7,23 @@
 </head>
 <body class="bg-dark">
     <div class="bg-warning text-center">
-        <a class="btn btn-warning btn-lg mt-3" th:href="@{/}" role="button">Parc Auto</a>
+        <a class="btn btn-warning btn-lg mt-3" th:href="@{/home_page}" role="button">Parc Auto</a>
     </div>
     <div class="bg-warning">
         <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group" role="group" aria-label="First group">
-                <a class="btn btn-outline-dark ml-5 mb-2" th:href="@{/neconectat}" role="button">Adauga Anunt</a>
-                <a class="btn btn-outline-dark mb-2" th:href="@{/neconectat}" role="button">Anunturile Mele</a>
-                <a class="btn btn-outline-dark mb-2" th:href="@{/neconectat}" role="button">Favorite</a>
+                <a class="btn btn-outline-dark ml-5 mb-2" th:href="@{/adauga_anunt}" role="button">Adauga Anunt</a>
+                <a class="btn btn-outline-dark mb-2" th:href="@{/anunturile_mele}" role="button">Anunturile Mele</a>
             </div>
             <div class="btn-group" role="group" aria-label="Second group">
-                <a class="btn btn-outline-dark mb-2" th:href="@{/register}" role="button">Inregistreaza-te</a>
-                <a class="btn btn-outline-dark mr-5 mb-2" th:href="@{/login}" role="button">Conecteaza-te</a>
-            </div>
-        </div>
-    </div>
-    <div class="bg-warning">
-        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group" role="group" aria-label="First group">
-                <h4 class="ml-5">Sorteaza toate masinile dupa:</h4>
-                <a class="btn btn-outline-dark ml-5 mb-2" th:href="@{'/sort/km'}" role="button">Kilometrii</a>
-                <a class="btn btn-outline-dark mb-2" th:href="@{'/sort/an'}" role="button">An</a>
-                <a class="btn btn-outline-dark mb-2" th:href="@{'/sort/pret'}" role="button">Pret</a>
-            </div>
-            <div class="btn-group" role="group" aria-label="Second Group">
-                <form class="form-inline my-2 my-lg-0" th:action="@{/search}" method="get">
-                    <input type="search" name="keyword" size="16" class="form-control mr-sm-2" required />
-                    &nbsp;
-                    <input type="submit" value="Search" class="btn btn-outline-dark my-2 my-sm-0 mr-5"/>
+                <p class="mr-5">Salut <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-dark mr-5 mb-2" type="submit" value="Deconecteaza-te">
                 </form>
             </div>
         </div>
     </div>
-
+    <h1 class="text-white text-center">Favoritele mele!</h1>
     <div>
         <ul class="list-group bg-dark">
             <li class="list-group-item bg-dark" th:each="car: ${listCars}">
@@ -59,6 +43,9 @@
                                 <h4 class="card-text" th:text="'Numar de telefon: ' + ${car.user.getPhoneNumber()}">Telefon</h4>
                                 <h3>Descriere:</h3>
                                 <p th:utext="${car.descriere}"></p>
+                                <div class="text-right">
+                                    <a class="btn btn-outline-danger mb-2" th:href="@{remove_favorite/__${car.id}__}" role="button">Sterge favorite!</a>
+                                </div>
                             </div>
                         </div>
                     </div>

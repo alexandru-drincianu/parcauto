@@ -1,4 +1,4 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

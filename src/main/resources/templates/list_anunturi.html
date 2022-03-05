@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parc Auto</title>
+    <link rel ="stylesheet" type = "text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body class="bg-white">
+    <div class="bg-warning text-center">
+        <a class="btn btn-warning btn-lg mt-3" th:href="@{/admin_page}" role="button">Parc Auto</a>
+    </div>
+    <div class="bg-warning">
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
+                <a class="btn btn-outline-dark ml-5 mb-2" th:href="@{/list_users}" role="button">Utilizatori</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Second group">
+                <p class="mr-5">Salut <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-dark mr-5 mb-2" type="submit" value="Deconecteaza-te">
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+    <h1 class="text-dark text-center">Anunturi</h1>
+    <div>
+        <table class="table table-striped table-bordered">
+            <thead class ="thead-dark">
+            <tr>
+                <th>ID Anunt</th>
+                <th>Marca</th>
+                <th>Model</th>
+                <th>An</th>
+                <th>Kilometri</th>
+                <th>Capacitate Motor</th>
+                <th>Combustibil</th>
+                <th>Pret</th>
+                <th>Sterge</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${listCars}">
+                <td th:text="${car.id}">ID</td>
+                <td th:text="${car.marca}">Marca</td>
+                <td th:text="${car.model}">Model</td>
+                <td th:text="${car.an}">An</td>
+                <td th:text="${car.km}">Kilometri</td>
+                <td th:text="${car.capacitateMotor}">Capacitate Motor</td>
+                <td th:text="${car.combustibil}">Combustibil</td>
+                <td th:text="${car.pret}">Pret</td>
+                <td><a th:href="@{delete_car/__${car.id}__}" class="btn btn-danger">Sterge</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+

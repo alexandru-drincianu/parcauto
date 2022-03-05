@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parc Auto</title>
+    <link rel ="stylesheet" type = "text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
+    <script th:src="@{/richtext/jquery.richtext.min.js}"></script>
+</head>
+<body class="bg-dark">
+    <div class="bg-warning text-center">
+        <a class="btn btn-warning btn-lg mt-3" th:href="@{/home_page}" role="button">Parc Auto</a>
+    </div>
+    <div class="bg-warning">
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
+                <a class="btn btn-outline-dark mb-2 ml-5" th:href="@{/anunturile_mele}" role="button">Anunturile Mele</a>
+                <a class="btn btn-outline-dark mb-2" th:href="@{/favorite}" role="button">Favorite</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Second group">
+                <p class="mr-5">Salut <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-dark mr-5 mb-2" type="submit" value="Deconecteaza-te">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center mt-5">
+        <div th:if="${car.id == null}">
+            <h1 class="text-white">Adauga un anunt!</h1>
+        </div>
+        <div th:unless="${car.id == null}">
+            <h1 class="text-white">Editeaza anuntul!</h1>
+        </div>
+        <form th:action="@{/process_car}" method ="post" enctype="multipart/form-data"
+              style="max-width: 1000px;margin:0 auto"
+              th:object="${car}">
+        <input type="hidden" th:field="*{id}" th:value="${car.id}"/>
+            <div class="m-3">
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Marca:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{marca}"  required
+                               minlength="1" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Model:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{model}" required
+                               minlength="1" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">An:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{an}"  required
+                               minlength="4" maxlength="4"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Capacitate Motor:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{capacitateMotor}" required
+                               minlength="4" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Kilometri:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{km}" required
+                               minlength="1" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Combustibil:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{combustibil}"  required
+                               minlength="1" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Pret:</label>
+                    <div class="col-8">
+                        <input type="text" class="form-control" th:field="*{pret}"  placeholder="euro" required
+                               minlength="1" maxlength="20"/>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Descriere:</label>
+                    <div class="col-8">
+                        <textarea class="form-control" th:field="*{descriere}" rows="5" required></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-form-label col-4 text-white">Imagine:</label>
+                    <div class="col-8">
+                        <input type="file" name="fileImage" id="fileImage" accept="image/png, image/jpeg" required />
+                    </div>
+                </div>
+                <div th:if="${car.id == null}" class="btn-group" role="group" aria-label="Second group">
+                    <button type="submit"  class="btn btn-primary">Adauga anunt!</button>
+                </div>
+                <div th:unless="${car.id == null}" class="btn-group" role="group" aria-label="Second group">
+                    <button type="submit"  class="btn btn-primary">Salveaza anunt!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#descriere").richText();
+    });
+</script>
+    <script th:src="@{/richtext/jquery.richtext.min.js}"></script>
+</body>
+</html>
+

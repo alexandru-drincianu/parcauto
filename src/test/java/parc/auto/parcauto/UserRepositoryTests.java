@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
+import parc.auto.parcauto.user.User;
+import parc.auto.parcauto.user.UserRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.NONE)
@@ -24,10 +26,10 @@ public class UserRepositoryTests {
     @Test
     public void testCreateUser() {
         User user = new User();
-        user.setEmail("test2@gmail.com");
-        user.setPassword("test2");
-        user.setFirstName("First2");
-        user.setLastName("Last2");
+        user.setEmail("test@gmail.com");
+        user.setPassword("test123");
+        user.setFirstName("First");
+        user.setLastName("Last");
         user.setPhoneNumber("000000000");
 
         User savedUser = repo.save(user);
@@ -39,7 +41,7 @@ public class UserRepositoryTests {
 
     @Test
     public void testFindUserByEmail() {
-        String email ="test2@gmail.com";
+        String email ="test@gmail.com";
         User user = repo.findByEmail(email);
         assertThat(user).isNotNull();
 

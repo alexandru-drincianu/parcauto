@@ -1,6 +1,10 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.user;
+
+import parc.auto.parcauto.car.Car;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +27,9 @@ public class User {
 
     @Column(nullable = false, unique = true, length = 10)
     private String phoneNumber;
+
+    @ManyToMany
+    public List<Car> favCars = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -70,5 +77,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Transient
+    public boolean existsInFav(Car car)
+    {
+        for(Car carr : favCars)
+        {
+            assert car != null;
+            if(car.getId().equals(carr.getId()))
+                return true;
+        }
+        return false;
     }
 }

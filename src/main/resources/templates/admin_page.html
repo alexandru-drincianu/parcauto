@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parc Auto</title>
+    <link rel ="stylesheet" type = "text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+</head>
+<body class="bg-dark">
+    <div class="bg-warning text-center">
+        <a class="btn btn-warning btn-lg mt-3" th:href="@{/admin_page}" role="button">Parc Auto</a>
+    </div>
+    <div class="bg-warning">
+        <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group" role="group" aria-label="First group">
+                <a class="btn btn-outline-dark mb-2 ml-5" th:href="@{/list_anunturi}" role="button">Anunturi</a>
+                <a class="btn btn-outline-dark mb-2" th:href="@{/list_users}" role="button">Utilizatori</a>
+            </div>
+            <div class="btn-group" role="group" aria-label="Second group">
+                <p class="mr-5">Salut <b>[[${#request.userPrincipal.principal.fullName}]]</b></p>
+                <form th:action="@{/logout}" method="post">
+                    <input class="btn btn-outline-dark mr-5 mb-2" type="submit" value="Deconecteaza-te">
+                </form>
+            </div>
+        </div>
+    </div>
+    <h1 class="text-center text-white">ADMIN PAGE</h1>
+</body>
+</html>
+

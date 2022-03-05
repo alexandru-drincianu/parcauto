@@ -1,4 +1,4 @@
-package parc.auto.parcauto;
+package parc.auto.parcauto.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,5 +46,9 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public String getFullName() {
+        return user.getFirstName() + " " + user.getLastName();
     }
 }
